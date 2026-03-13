@@ -1,47 +1,31 @@
 import React from "react";
-class Counter extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = { count: 5 };
-    this.handleDecrement = this.handleDecrement.bind(this);
-    this.handleIncrement = this.handleIncrement.bind(this);
+class App extends React.Component {
+  constructor(prop) {
+    super(prop);
+
+    this.state = { location: "India" };
+    this.fetchWeather = this.fetchWeather.bind(this);
   }
-
-  handleDecrement() {
-    // console.log(this)
-    // it is undefined unless we manually bind it
-
-    this.setState((curState) => {
-      return {
-        count: curState.count - 1,
-      };
-    });
-
-    // this.setState({count:10});
-  }
-  handleIncrement() {
-    this.setState((curState) => {
-      return {
-        count: curState.count + 1,
-      };
-    });
+  fetchWeather() {
+    console.log("loading data");
+    console.log(this);
   }
   render() {
-    const date = new Date("June 21 2027");
-    date.setDate(date.getDate() + this.state.count);
     return (
-      <div>
-        <button onClick={this.handleDecrement}>-</button>
-        <span>
-          {date.toDateString()} [ {this.state.count} ]
-        </span>
-        <button onClick={this.handleIncrement}>+</button>
+      <div className="app">
+        <h1>Classy Weather</h1>
+        <div>
+          <input
+            type="text"
+            placeholder="Search for location..."
+            value={this.state.location}
+            onChange={(e) => this.setState({ location: e.target.value })}
+          />
+        </div>
+        <button onClick={this.fetchWeather}>Get Weather</button>
       </div>
     );
   }
 }
-export default Counter;
-
-// hooks works in function component not in class components
-// in class we have one huge state object now multiple state variables
+export default App;
